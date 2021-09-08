@@ -1,10 +1,9 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
-import './App.css'
 import { Route, Link } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI'
+import './App.css'
 import Search from './SearchPage'
 import Bookshelf from './Bookshelf'
-import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
   constructor(props) {
@@ -12,16 +11,15 @@ class BooksApp extends React.Component {
 
     this.state = {
       books: [],
-      sample: [],
       isLoading: false
     }
   }
 
   componentDidMount() {
-    this.getAllBookshelfs();
+    this.getAllBooks();
   }
 
-  getAllBookshelfs = () => {
+  getAllBooks = () => {
     this.setState({ isLoading: true })
     BooksAPI.getAll().then(books => {
       this.setState({
@@ -33,7 +31,11 @@ class BooksApp extends React.Component {
 
   moveBookHandle = (book, shelf) => {
     BooksAPI.update(book, shelf).then(response => {
-      this.getAllBookshelfs();
+      book.shelf = shelf
+
+      this.setState(state => ({
+        books: state.books.filter(b => b.id !== book.id).concat([ book ])
+      }))
     })
   }
   
