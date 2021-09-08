@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BookCover from './BookCover';
 
-const Bookshelf = (props) =>{
+const Bookshelf = (props) => {
     
     const moveBook = (book, shelf) => {
         const { onMoveBook } = props;
