@@ -61,7 +61,7 @@ class SearchPage extends Component {
                 <div className="search-books-results">
                     {this.state.isResutlsEmpty && (
                         <div className="no-results">
-                            <span>No Books found</span>
+                            <span>No results matching query were found</span>
                         </div>
                     )}
                     <ol className="books-grid">
